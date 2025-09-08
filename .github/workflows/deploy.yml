@@ -24,9 +24,6 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Export static files
-        run: npm run export
-
       - name: Deploy to Surge
         run: npx surge ./out ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
         env:
