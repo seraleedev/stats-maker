@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "./font.css";
+
+@theme {
+  --color-textBlack: #333;
+  --font-dnf: "DnfBitbeatV2", sans-serif;
+  --font-pretendard: "Pretendard", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  @apply font-pretendard;
+  @apply text-textBlack;
+}
+
+body::-webkit-scrollbar-button {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  body {
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
