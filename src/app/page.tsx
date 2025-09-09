@@ -22,7 +22,7 @@ export default function Home() {
           }}
         >
           <Title text="STATS MAKER" />
-          <p className="text-lg">가나다라마바사</p>
+          <p className="text-2xl">가나다라마바사</p>
         </div>
       </div>
     </FlexBox>
