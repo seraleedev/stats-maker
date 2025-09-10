@@ -25,11 +25,12 @@ jobs:
         run: npm run build
 
       - name: Debug build
-        run: 
-        echo "빌드 완료 후 루트:"
-        ls -alh
-        echo "빌드 결과 (out):"
-        ls -alh ./out || echo "❌ out 없음"
+        run: |
+          echo "현재 디렉토리: $(pwd)"
+          echo "루트 내용:"
+          ls -alh
+          echo "out 폴더 내용:"
+          ls -alh ./out || echo "❌ ./out 폴더 없음"
 
       - name: Deploy to Surge
         run: npx surge ./out ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
