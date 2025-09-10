@@ -5,7 +5,7 @@ interface ISwitch {
 }
 const Switch = ({ text }: ISwitch) => {
   return (
-    <FlexBox justify="center" className="gap-x-3">
+    <FlexBox justify="center" className="gap-x-2">
       <p className="text-base text-white">{text}</p>
       <label className="inline-flex items-center cursor-pointer">
         <input type="checkbox" value="" className="sr-only peer" />

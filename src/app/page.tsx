@@ -1,14 +1,16 @@
 import { FlexBox } from "@/components/common";
+import ColorInput from "@/components/form/ColorInput";
+import Input from "@/components/form/Input";
+import InputBox from "@/components/form/InputBox";
 import Switch from "@/components/Switch";
 import { Title } from "@/components/typhography";
-import theme from "@/configs/theme";
 
 export default function Home() {
   return (
     <FlexBox justify="center">
       <div
+        className="bg-gray-900"
         style={{
-          background: theme.colors.darkGray,
           width: "100%",
           maxWidth: 400,
           height: "100vh",
@@ -27,6 +29,20 @@ export default function Home() {
             <Switch text="랜덤 속성" />
             <Switch text="랜덤 수치" />
           </FlexBox>
+
+          <form className="grid grid-cols-1 gap-2 mt-3">
+            <InputBox
+              labelName="이름"
+              labelId="name"
+              components={<Input type="text" id="name" />}
+            />
+
+            <InputBox
+              labelName="색상"
+              labelId="color"
+              components={<ColorInput />}
+            />
+          </form>
         </div>
       </div>
     </FlexBox>
