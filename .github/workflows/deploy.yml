@@ -33,6 +33,6 @@ jobs:
           ls -alh ./out || echo "❌ ./out 폴더 없음"
 
       - name: Deploy to Surge
-        run: npx surge ./out ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+        run: npx surge ./out ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }} --force
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
