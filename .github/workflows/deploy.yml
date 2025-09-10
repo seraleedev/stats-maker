@@ -24,6 +24,13 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
+      - name: Debug build
+        run: 
+        echo "빌드 완료 후 루트:"
+        ls -alh
+        echo "빌드 결과 (out):"
+        ls -alh ./out || echo "❌ out 없음"
+
       - name: Deploy to Surge
         run: npx surge ./out ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
         env:
