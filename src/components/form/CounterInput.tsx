@@ -5,6 +5,7 @@ import { inputStyle } from ".";
 
 const CounterInput = ({ id, value, onChange }: BaseInputProps) => {
   const buttonStyle = `text-white cursor-pointer flex justify-center items-center`;
+
   return (
     <FlexBox className="w-full justify-between gap-5">
       <button type="button" className={buttonStyle}>
