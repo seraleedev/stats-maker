@@ -1,7 +1,7 @@
 import { BaseInputProps } from ".";
 
 interface InputProps extends BaseInputProps {
-  type: string;
+  type: "text" | "number";
   placeholder?: string;
 }
 
@@ -18,9 +18,9 @@ const Input = ({ type, id, value, placeholder, onChange }: InputProps) => {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      min={type === "number" ? "0" : undefined}
-      max={type === "number" ? "10" : undefined}
-      step={type === "number" ? "1" : undefined}
+      min={type == "number" ? 1 : undefined}
+      max={type == "number" ? 10 : undefined}
+      step={type == "number" ? 1 : undefined}
     />
   );
 };

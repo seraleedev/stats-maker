@@ -2,6 +2,7 @@ import Input from "./Input";
 import InputBox from "./InputBox";
 import ColorInput from "./ColorInput";
 import RangeInput from "./RangeInput";
+import Button from "./Button";
 
 export interface BaseInputProps {
   id?: string;
@@ -9,4 +10,10 @@ export interface BaseInputProps {
   onChange?: () => void;
 }
 
-export { Input, InputBox, ColorInput, RangeInput };
+export interface ButtonProps {
+  text?: string;
+  design?: "cancel";
+  onClick?: () => void;
+}
+
+export { Input, InputBox, ColorInput, RangeInput, Button };
