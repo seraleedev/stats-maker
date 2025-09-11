@@ -1,5 +1,6 @@
 import { FlexBox } from "@/components/common";
 import { Button, RangeInput } from "@/components/form";
+import CounterInput from "@/components/form/CounterInput";
 import ColorInput from "@/components/form/ColorInput";
 import Input from "@/components/form/Input";
 import InputBox from "@/components/form/InputBox";
@@ -22,7 +23,7 @@ export default function Home() {
             <InputBox
               labelName="이름"
               labelId="name"
-              components={<Input type="text" id="name" />}
+              components={<Input id="name" />}
             />
 
             <InputBox
@@ -33,7 +34,7 @@ export default function Home() {
             <InputBox
               labelName="최대 수치"
               labelId="maxStat"
-              components={<Input type="number" id="maxStat" />}
+              components={<CounterInput id="maxStat" />}
             />
             <InputBox
               labelName="수치1"
