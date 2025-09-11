@@ -13,6 +13,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="hydrated" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin=""
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+        />
+      </head>
       <body className={`bg-gray-100`}>{children}</body>
     </html>
   );

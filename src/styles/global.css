@@ -22,19 +22,35 @@ body {
   @apply text-textBlack;
 }
 
-body::-webkit-scrollbar-button {
-  display: none;
+/* ===== Scrollbar CSS ===== */
+body {
+  -ms-overflow-style: none; /* ms */
+  scrollbar-width: none; /* firefox */
 }
 
-@media (min-width: 1024px) {
-  body {
-    -ms-overflow-style: none; /* 인터넷 익스플로러 */
-    scrollbar-width: none; /* 파이어폭스 */
-  }
+/* chrome */
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #d1d5dc transparent;
+}
 
-  body::-webkit-scrollbar {
-    display: none;
-  }
+/* Chrome, Edge, and Safari */
+body::-webkit-scrollbar {
+  width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #d1d5dc;
+  border-radius: 10px;
+  border: 3px solid transparent;
 }
 
 a {

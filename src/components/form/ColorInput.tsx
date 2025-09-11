@@ -1,10 +1,6 @@
-interface ColorInputProps {
-  id?: string;
-  value?: string;
-  onChange?: () => void;
-}
+import { BaseInputProps } from ".";
 
-const ColorInput = ({ id, value, onChange }: ColorInputProps) => {
+const ColorInput = ({ id, value, onChange }: BaseInputProps) => {
   return (
     <div
       className={`

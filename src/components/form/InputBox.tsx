@@ -9,7 +9,7 @@ interface InputBoxProps {
 
 const InputBox = ({ labelName, labelId, components }: InputBoxProps) => {
   return (
-    <FlexBox direction="col" align="start" className="mb-3">
+    <FlexBox align="start" className="mb-3 flex-col">
       <label className="text-white font-medium mb-2" htmlFor={labelId}>
         {labelName}
       </label>

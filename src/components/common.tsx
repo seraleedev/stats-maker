@@ -13,7 +13,7 @@ export const FlexBox = ({
   direction = "row",
   justify = "start",
   align = "center",
-  className = "",
+  className,
   style,
 }: IFlexBox) => {
   return (

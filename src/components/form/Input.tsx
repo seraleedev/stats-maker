@@ -1,9 +1,8 @@
-interface InputProps {
+import { BaseInputProps } from ".";
+
+interface InputProps extends BaseInputProps {
   type: string;
-  id?: string;
-  value?: string;
   placeholder?: string;
-  onChange?: () => void;
 }
 
 const Input = ({ type, id, value, placeholder, onChange }: InputProps) => {
@@ -13,13 +12,15 @@ const Input = ({ type, id, value, placeholder, onChange }: InputProps) => {
       type={type}
       id={id}
       className={`border-2 block w-full p-2 text-md rounded-sm
-        focus:ring-blue-600 focus:border-blue-600
-        focus-visible:outline-2
+        focus:ring-blue-600 focus:border-blue-600 focus:outline-none
           bg-gray-700 border-gray-700 
          text-white placeholder-gray-400 font-light`}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      min={type === "number" ? "0" : undefined}
+      max={type === "number" ? "10" : undefined}
+      step={type === "number" ? "1" : undefined}
     />
   );
 };
