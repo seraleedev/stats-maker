@@ -17,12 +17,13 @@ import {
   maxStatlabelList,
 } from "@/configs/initial";
 import { colorToRgba } from "@/util/colorFn";
+import StatBox from "@/components/form/StatBox";
 
 export default function Home() {
   const colorPickerRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState<string>("");
   const [rgb, setRgb] = useState<number[]>(initialColor);
-  const [maxStatIndex, setMaxStatIndex] = useState<number>(maxStatlabelList[0]);
+  const [maxStatIndex, setMaxStatIndex] = useState<number>(0);
   const [statData, setStatData] = useState<IStatData[]>(initialData);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +36,16 @@ export default function Home() {
       const value = colorToRgba(color);
       setRgb(value);
     }
+  };
+
+  const onChangeStat = (value: number, index: number) => {
+    const newDataList = statData.map((item, i) => {
+      if (i === index) {
+        return { ...item, stat: value };
+      }
+      return item;
+    });
+    setStatData(newDataList);
   };
 
   return (
@@ -79,12 +90,31 @@ export default function Home() {
                 />
               }
             />
-            {/*
-            <InputBox
-              labelName="수치1"
-              labelId="stat1"
-              components={<RangeInput />}
-            /> */}
+
+            <label className="text-white font-medium mb-2">수치 설정</label>
+            {statData.map((data, index) => (
+              <StatBox
+                className="mb-8"
+                key={`stat-${index}`}
+                components={
+                  <>
+                    <Input
+                      onChange={() => console.log("")}
+                      value={data.label}
+                    />
+                    <CounterInput
+                      index={index}
+                      className="max-w-32"
+                      id={`data-label-${index}`}
+                      value={data.stat}
+                      onChangeStat={onChangeStat}
+                      min={1}
+                      max={maxStatlabelList[maxStatIndex]}
+                    />
+                  </>
+                }
+              />
+            ))}
           </form>
 
           <Graph

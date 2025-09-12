@@ -3,28 +3,50 @@ import { FlexBox } from "../common";
 import { RiSubtractLine, RiAddLine } from "@remixicon/react";
 import { inputStyle } from ".";
 
-import { Dispatch } from "react";
-
 interface CounterInputProps extends BaseInputProps {
-  setState: Dispatch<React.SetStateAction<number>>;
+  index: number;
+  min: number;
+  max: number;
+  className?: string;
+  onChangeStat?: (value: number, index: number) => void;
 }
 
-const CounterInput = ({ id, value, setState }: CounterInputProps) => {
+const CounterInput = ({
+  id,
+  value,
+  min,
+  max,
+  className,
+  onChangeStat,
+  index,
+}: CounterInputProps) => {
   const buttonStyle = `text-white cursor-pointer flex justify-center items-center active:bg-gray-800`;
 
   const controlValue = (action: "decrease" | "increase") => {
     const val = Number(value);
+    if (onChangeStat) {
+      let result = val;
+      if (action === "decrease") {
+        result = val <= min ? val : val - 1;
+      }
+      if (action === "increase") {
+        result = val >= max ? val : val + 1;
+      }
+      onChangeStat(result, index);
+    }
+  };
 
-    // if (action === "decrease") {
-    //   setState(val == initialMaxStat.min ? val : val - initialMaxStat.min);
-    // }
-    // if (action === "increase") {
-    //   setState(val == initialMaxStat.max ? val : val + initialMaxStat.min);
-    // }
+  const onChangeStatString = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = parseInt(e.target.value);
+    if (value < min) value = min;
+    if (value > max) value = max;
+    if (onChangeStat) {
+      onChangeStat(value, index);
+    }
   };
 
   return (
-    <FlexBox className="w-full justify-between gap-5">
+    <FlexBox className={`w-full justify-between gap-1 ${className}`}>
       <button
         type="button"
         className={buttonStyle}
@@ -36,12 +58,12 @@ const CounterInput = ({ id, value, setState }: CounterInputProps) => {
         type="number"
         id={id}
         className={`${inputStyle} text-center`}
-        value={value}
-        readOnly
-        min={1}
-        max={10}
-        step={5}
-        placeholder={`${1} ~ ${10}까지의 수치 입력`}
+        value={value || ""}
+        onChange={onChangeStatString}
+        min={min}
+        max={max}
+        step={1}
+        placeholder={`1`}
       />
       <button
         type="button"
