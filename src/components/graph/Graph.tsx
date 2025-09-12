@@ -15,7 +15,7 @@ import { rgbToString } from "@/util/colorFn";
 interface GraphProps {
   name?: string;
   maxStat: number;
-  statDatas?: { label: string; stat: number }[];
+  statDatas: { label: string; stat: number }[];
   chartColor: number[];
 }
 const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
@@ -29,13 +29,15 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
     ChartDataLabels
   );
   const color = rgbToString(chartColor);
+  const stringLabels = statDatas.map((data) => `${data.label} ${data.stat}`);
+  const dataStats = statDatas.map((data) => data.stat);
 
   const data = {
-    labels: ["Thing 1", "Thing 2", "Thing 3", "Thing 4", "Thing 5", "Thing 6"],
+    labels: stringLabels,
     datasets: [
       {
         label: "",
-        data: [4, 2, 4, 2, 4, 2],
+        data: dataStats,
         backgroundColor: `rgba(${color},0.2)`,
         borderColor: `rgba(${color},1)`,
         borderWidth: 1,
@@ -80,6 +82,10 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
           color: theme.colors.black, // 레이블 색상
           font: {
             size: 16,
+          },
+          callback: (label: any) => {
+            const [text, number] = label.split(" ");
+            return [text, number];
           },
         },
       },

@@ -48,6 +48,16 @@ export default function Home() {
     setStatData(newDataList);
   };
 
+  const onChangeLabel = (value: string, index: number) => {
+    const newDataList = statData.map((item, i) => {
+      if (i === index) {
+        return { ...item, label: value };
+      }
+      return item;
+    });
+    setStatData(newDataList);
+  };
+
   return (
     <FlexBox className="justify-center">
       <div className="bg-gray-900 px-[20px] pt-[40px] overflow-y-auto w-full min-h-lvh max-w-[400px]">
@@ -99,8 +109,9 @@ export default function Home() {
                 components={
                   <>
                     <Input
-                      onChange={() => console.log("")}
+                      onChange={(e) => onChangeLabel(e.target.value, index)}
                       value={data.label}
+                      placeholder={data.label}
                     />
                     <CounterInput
                       index={index}
@@ -120,7 +131,7 @@ export default function Home() {
           <Graph
             name={name}
             maxStat={maxStatlabelList[maxStatIndex]}
-            statDatas={[{ label: "수치1", stat: 5 }]}
+            statDatas={statData}
             chartColor={rgb}
           />
           <Button text="PNG로 저장" />
