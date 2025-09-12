@@ -69,7 +69,7 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
         min: 1,
         max: maxStat,
         angleLines: {
-          color: maxStat < 100 ? "#e5e7eb" : "transparent", // 각도 라인 색, gray-300
+          color: "#e5e7eb", // 각도 라인 색, gray-300
         },
         grid: {
           color: maxStat < 100 ? "#e5e7eb" : "transparent", // 그리드 색, gray-300
@@ -92,7 +92,7 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
     },
   };
   return (
-    <div className="mt-5 mb-5">
+    <div className="mb-5">
       <h2 className="text-white text-center font-dnf text-2xl mb-3">
         {name || "익명"}의 스탯
       </h2>

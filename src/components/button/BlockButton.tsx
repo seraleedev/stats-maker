@@ -1,8 +1,8 @@
-import { ButtonProps } from ".";
+import { ButtonProps } from "@/components/button";
 import { RiDownloadFill, RiResetLeftLine } from "@remixicon/react";
 import { FlexBox } from "../common";
 
-const Button = ({ text, onClick, design }: ButtonProps) => {
+const BlockButton = ({ text, onClick, design }: ButtonProps) => {
   const primaryStyle = `bg-blue-600 hover:bg-blue-800 active:ring-blue-300 text-white`;
   const cancelStyle = `bg-gray-300 hover:bg-gray-400 active:ring-gray-200 text-gray-600 `;
   return (
@@ -27,4 +27,4 @@ const Button = ({ text, onClick, design }: ButtonProps) => {
   );
 };
 
-export default Button;
+export default BlockButton;

@@ -2,6 +2,7 @@ import { BaseInputProps } from ".";
 import { FlexBox } from "../common";
 import { RiSubtractLine, RiAddLine } from "@remixicon/react";
 import { inputStyle } from ".";
+import IconButton from "../button/iconButton";
 
 interface CounterInputProps extends BaseInputProps {
   index: number;
@@ -20,8 +21,6 @@ const CounterInput = ({
   onChangeStat,
   index,
 }: CounterInputProps) => {
-  const buttonStyle = `text-white cursor-pointer flex justify-center items-center active:bg-gray-800`;
-
   const controlValue = (action: "decrease" | "increase") => {
     const val = Number(value);
     if (onChangeStat) {
@@ -47,13 +46,11 @@ const CounterInput = ({
 
   return (
     <FlexBox className={`w-full justify-between gap-1 ${className}`}>
-      <button
-        type="button"
-        className={buttonStyle}
+      <IconButton
+        icon={<RiSubtractLine />}
         onClick={() => controlValue("decrease")}
-      >
-        <RiSubtractLine />
-      </button>
+      />
+
       <input
         type="number"
         id={id}
@@ -65,13 +62,11 @@ const CounterInput = ({
         step={1}
         placeholder={`1`}
       />
-      <button
-        type="button"
-        className={buttonStyle}
+
+      <IconButton
+        icon={<RiAddLine />}
         onClick={() => controlValue("increase")}
-      >
-        <RiAddLine />
-      </button>
+      />
     </FlexBox>
   );
 };
