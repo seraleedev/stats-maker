@@ -1,10 +1,12 @@
+import { initialColor } from "@/configs/initial";
 import { BaseInputProps } from ".";
 
 interface ColorInputProps extends BaseInputProps {
+  ref: React.RefObject<HTMLInputElement | null>;
   onChange?: () => void;
 }
 
-const ColorInput = ({ id, value, onChange }: ColorInputProps) => {
+const ColorInput = ({ id, value, onChange, ref }: ColorInputProps) => {
   return (
     <div
       className={`
@@ -22,10 +24,12 @@ const ColorInput = ({ id, value, onChange }: ColorInputProps) => {
         `}
       >
         <input
+          ref={ref}
           type="color"
           id={id}
           value={value}
           onChange={onChange}
+          defaultValue={"#ff6384"}
           className={`absolute
             w-[110%] h-[60px]
             -left-[10px] -top-[10px]

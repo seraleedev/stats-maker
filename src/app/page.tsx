@@ -7,20 +7,31 @@ import Input from "@/components/form/Input";
 import InputBox from "@/components/form/InputBox";
 import Switch from "@/components/Switch";
 import { Title } from "@/components/typhography";
-import Graph from "@/components/Graph";
+import Graph from "@/components/graph/Graph";
 import Footer from "@/components/Footer";
-import { useState } from "react";
-import { initialData, IStatData } from "@/configs/initial";
+import { useState, useRef } from "react";
+import { initialColor, initialData, IStatData } from "@/configs/initial";
+import { colorToRgba } from "@/util/colorFn";
 
 export default function Home() {
+  const colorPickerRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState<string>("");
-  const [color, setColor] = useState<string>("");
+  const [rgb, setRgb] = useState<number[]>(initialColor);
   const [maxStat, setMaxStat] = useState<number>(5);
   const [statData, setStatData] = useState<IStatData[]>(initialData);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
+
+  const onChangeColor = () => {
+    const color = colorPickerRef.current?.value;
+    if (color) {
+      const value = colorToRgba(color);
+      setRgb(value);
+    }
+  };
+  console.log(rgb);
 
   return (
     <FlexBox className="justify-center">
@@ -44,7 +55,9 @@ export default function Home() {
             <InputBox
               labelName="그래프 색상"
               labelId="color"
-              components={<ColorInput />}
+              components={
+                <ColorInput ref={colorPickerRef} onChange={onChangeColor} />
+              }
             />
             <InputBox
               labelName="최대 수치"
@@ -62,7 +75,7 @@ export default function Home() {
             name={name}
             maxStat={10}
             statDatas={[{ label: "수치1", stat: 5 }]}
-            chartColor="red"
+            chartColor={rgb}
           />
           <Button text="PNG로 저장" />
           <Button text="초기화" design="cancel" />

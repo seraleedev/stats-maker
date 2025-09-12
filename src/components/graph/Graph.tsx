@@ -10,12 +10,13 @@ import {
 import { Radar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import theme from "@/configs/theme";
+import { rgbToString } from "@/util/colorFn";
 
 interface GraphProps {
   name?: string;
   maxStat?: number;
   statDatas?: { label: string; stat: number }[];
-  chartColor: string;
+  chartColor: number[];
 }
 const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
   ChartJS.register(
@@ -27,6 +28,7 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
     Legend,
     ChartDataLabels
   );
+  const color = rgbToString(chartColor);
 
   const data = {
     labels: ["Thing 1", "Thing 2", "Thing 3", "Thing 4", "Thing 5", "Thing 6"],
@@ -34,8 +36,8 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
       {
         label: "",
         data: [4, 2, 4, 2, 4, 2],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: `rgba(${color},0.2)`,
+        borderColor: `rgba(${color},1)`,
         borderWidth: 1,
       },
     ],

@@ -29,3 +29,5 @@ export const initialData: IStatData[] = [
     stat: 1,
   },
 ];
+
+export const initialColor: number[] = [255, 99, 132];
