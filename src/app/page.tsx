@@ -10,14 +10,19 @@ import { Title } from "@/components/typhography";
 import Graph from "@/components/graph/Graph";
 import Footer from "@/components/Footer";
 import { useState, useRef } from "react";
-import { initialColor, initialData, IStatData } from "@/configs/initial";
+import {
+  initialColor,
+  initialData,
+  IStatData,
+  maxStatlabelList,
+} from "@/configs/initial";
 import { colorToRgba } from "@/util/colorFn";
 
 export default function Home() {
   const colorPickerRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState<string>("");
   const [rgb, setRgb] = useState<number[]>(initialColor);
-  const [maxStat, setMaxStat] = useState<number>(5);
+  const [maxStatIndex, setMaxStatIndex] = useState<number>(maxStatlabelList[0]);
   const [statData, setStatData] = useState<IStatData[]>(initialData);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +36,6 @@ export default function Home() {
       setRgb(value);
     }
   };
-  console.log(rgb);
 
   return (
     <FlexBox className="justify-center">
@@ -56,24 +60,36 @@ export default function Home() {
               labelName="그래프 색상"
               labelId="color"
               components={
-                <ColorInput ref={colorPickerRef} onChange={onChangeColor} />
+                <ColorInput
+                  ref={colorPickerRef}
+                  onChange={onChangeColor}
+                  id="color"
+                />
               }
             />
             <InputBox
               labelName="최대 수치"
               labelId="maxStat"
-              components={<CounterInput id="maxStat" />}
+              components={
+                <RangeInput
+                  id="maxStat"
+                  labelList={maxStatlabelList}
+                  value={maxStatIndex}
+                  setState={setMaxStatIndex}
+                />
+              }
             />
+            {/*
             <InputBox
               labelName="수치1"
               labelId="stat1"
               components={<RangeInput />}
-            />
+            /> */}
           </form>
 
           <Graph
             name={name}
-            maxStat={10}
+            maxStat={maxStatlabelList[maxStatIndex]}
             statDatas={[{ label: "수치1", stat: 5 }]}
             chartColor={rgb}
           />

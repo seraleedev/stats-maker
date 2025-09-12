@@ -14,7 +14,7 @@ import { rgbToString } from "@/util/colorFn";
 
 interface GraphProps {
   name?: string;
-  maxStat?: number;
+  maxStat: number;
   statDatas?: { label: string; stat: number }[];
   chartColor: number[];
 }
@@ -65,12 +65,12 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
     scales: {
       r: {
         min: 1,
-        max: 5,
+        max: maxStat,
         angleLines: {
-          color: "#ccc", // 각도 라인 색
+          color: maxStat < 100 ? "#e5e7eb" : "transparent", // 각도 라인 색, gray-300
         },
         grid: {
-          color: "#eee", // 방사형 그리드 색
+          color: maxStat < 100 ? "#e5e7eb" : "transparent", // 그리드 색, gray-300
         },
         ticks: {
           display: false,

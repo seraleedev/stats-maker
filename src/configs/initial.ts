@@ -31,3 +31,4 @@ export const initialData: IStatData[] = [
 ];
 
 export const initialColor: number[] = [255, 99, 132];
+export const maxStatlabelList = [5, 10, 100];

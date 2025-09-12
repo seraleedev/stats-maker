@@ -1,16 +1,29 @@
 import { BaseInputProps } from ".";
 import { FlexBox } from "../common";
+import { Dispatch } from "react";
 
 interface RangeInputProps extends BaseInputProps {
-  maxStat?: number;
-  onChange?: () => void;
+  labelList: number[];
+
+  setState: Dispatch<React.SetStateAction<number>>;
 }
-const RangeInput = ({ id, value, onChange, maxStat }: RangeInputProps) => {
+const RangeInput = ({ id, value, labelList, setState }: RangeInputProps) => {
+  const onChangeStatData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const index = parseInt(e.target.value);
+    setState(index);
+  };
+
   return (
     <div className="w-full">
       <FlexBox className="justify-between w-full">
-        <span className="text-white">1</span>
-        <span className="text-white">10</span>
+        {labelList.map((label, index) => (
+          <span
+            key={`max-${index}`}
+            className="text-white text-center min-w-5 block"
+          >
+            {label}
+          </span>
+        ))}
       </FlexBox>
 
       <input
@@ -20,10 +33,10 @@ const RangeInput = ({ id, value, onChange, maxStat }: RangeInputProps) => {
      `}
         id={id}
         value={value}
-        onChange={onChange}
+        onChange={onChangeStatData}
         step={1}
-        min={1}
-        max={10}
+        min={0}
+        max={labelList.length - 1}
       />
     </div>
   );
