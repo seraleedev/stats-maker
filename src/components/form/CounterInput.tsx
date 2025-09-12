@@ -14,12 +14,13 @@ const CounterInput = ({ id, value, onChange }: BaseInputProps) => {
       <input
         type="number"
         id={id}
-        className={`${inputStyle}`}
+        className={`${inputStyle} text-center`}
         value={value}
         onChange={onChange}
-        min={1}
+        min={5}
         max={10}
         step={1}
+        placeholder="5~10까지의 수치 입력"
       />
       <button type="button" className={buttonStyle}>
         <RiAddLine />
