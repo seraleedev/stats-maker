@@ -3,6 +3,7 @@ import { FlexBox } from "../common";
 
 interface RangeInputProps extends BaseInputProps {
   maxStat?: number;
+  onChange?: () => void;
 }
 const RangeInput = ({ id, value, onChange, maxStat }: RangeInputProps) => {
   return (

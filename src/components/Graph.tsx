@@ -86,7 +86,7 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
   return (
     <div className="mt-5 mb-5">
       <h2 className="text-white text-center font-dnf text-2xl mb-3">
-        {name || "이름"}의 스탯
+        {name || "익명"}의 스탯
       </h2>
       <div className="w-full p-2 bg-white rounded-sm">
         <Radar data={data} options={options} />

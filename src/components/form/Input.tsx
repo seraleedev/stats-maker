@@ -2,6 +2,7 @@ import { BaseInputProps } from ".";
 import { inputStyle } from ".";
 interface InputProps extends BaseInputProps {
   placeholder?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({ id, value, placeholder, onChange }: InputProps) => {

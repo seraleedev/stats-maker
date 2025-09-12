@@ -3,7 +3,11 @@ import { FlexBox } from "../common";
 import { RiSubtractLine, RiAddLine } from "@remixicon/react";
 import { inputStyle } from ".";
 
-const CounterInput = ({ id, value, onChange }: BaseInputProps) => {
+interface CounterInputProps extends BaseInputProps {
+  onChange?: () => void;
+}
+
+const CounterInput = ({ id, value, onChange }: CounterInputProps) => {
   const buttonStyle = `text-white cursor-pointer flex justify-center items-center`;
 
   return (

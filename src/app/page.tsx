@@ -8,16 +8,27 @@ import InputBox from "@/components/form/InputBox";
 import Switch from "@/components/Switch";
 import { Title } from "@/components/typhography";
 import Graph from "@/components/Graph";
+import Footer from "@/components/Footer";
+import { useState } from "react";
+import { initialData, IStatData } from "@/configs/initial";
 
 export default function Home() {
+  const [name, setName] = useState<string>("");
+  const [color, setColor] = useState<string>("");
+  const [maxStat, setMaxStat] = useState<number>(5);
+  const [statData, setStatData] = useState<IStatData[]>(initialData);
+
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
   return (
     <FlexBox className="justify-center">
-      <div className="bg-gray-900 px-[20px] py-[40px] overflow-y-auto w-full min-h-lvh max-w-[400px]">
+      <div className="bg-gray-900 px-[20px] pt-[40px] overflow-y-auto w-full min-h-lvh max-w-[400px]">
         <div className="w-full h-full relative">
           <Title text="STATS MAKER" />
 
           <FlexBox className="mt-8 gap-3 justify-end">
-            <Switch text="랜덤 속성" />
             <Switch text="랜덤 수치" />
           </FlexBox>
 
@@ -25,7 +36,9 @@ export default function Home() {
             <InputBox
               labelName="이름"
               labelId="name"
-              components={<Input id="name" />}
+              components={
+                <Input id="name" value={name} onChange={onChangeName} />
+              }
             />
 
             <InputBox
@@ -46,13 +59,15 @@ export default function Home() {
           </form>
 
           <Graph
-            name="홍길동"
+            name={name}
             maxStat={10}
             statDatas={[{ label: "수치1", stat: 5 }]}
             chartColor="red"
           />
-          <Button text="이미지 저장" />
+          <Button text="PNG로 저장" />
           <Button text="초기화" design="cancel" />
+
+          <Footer />
         </div>
       </div>
     </FlexBox>

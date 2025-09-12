@@ -7,7 +7,7 @@ import Button from "./Button";
 export interface BaseInputProps {
   id?: string;
   value?: string | number;
-  onChange?: () => void;
+
 }
 
 export interface ButtonProps {
