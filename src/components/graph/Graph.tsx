@@ -11,14 +11,16 @@ import { Radar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import theme from "@/configs/theme";
 import { rgbToString } from "@/util/colorFn";
+import { FlexBox } from "../common";
 
 interface GraphProps {
   name?: string;
   maxStat: number;
   statDatas: { label: string; stat: number }[];
   chartColor: number[];
+  ref?: React.RefObject<any>;
 }
-const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
+const Graph = ({ name, maxStat, statDatas, chartColor, ref }: GraphProps) => {
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -96,9 +98,9 @@ const Graph = ({ name, maxStat, statDatas, chartColor }: GraphProps) => {
       <h2 className="text-white text-center font-dnf text-2xl mb-3 mt-3">
         {name || "익명"}의 스탯
       </h2>
-      <div className="w-full p-2 bg-white rounded-sm">
-        <Radar data={data} options={options} />
-      </div>
+      <FlexBox className="w-full p-2 bg-white rounded-sm justify-center align-center">
+        <Radar data={data} options={options} ref={ref} />
+      </FlexBox>
     </div>
   );
 };

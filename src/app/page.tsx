@@ -20,13 +20,11 @@ import {
 } from "@remixicon/react";
 import IconButton from "@/components/button/iconButton";
 import { useStatMaker } from "../hook/useStatMaker";
+import { useInput } from "@/hook/useInput";
+import { useDownload } from "@/hook/useDownload";
 
 export default function Home() {
   const {
-    name,
-    onChangeName,
-    rgb,
-    onChangeColor,
     maxStatIndex,
     setMaxStatIndex,
     statData,
@@ -36,12 +34,14 @@ export default function Home() {
     onChangeLabel,
     resetStats,
     randomStats,
-    colorPickerRef,
   } = useStatMaker();
+
+  const { name, onChangeName, rgb, onChangeColor, colorPickerRef } = useInput();
+  const { onClickDownload, graphRef } = useDownload();
 
   return (
     <FlexBox className="justify-center">
-      <div className="bg-gray-900 px-[20px] pt-[40px] overflow-y-auto w-full min-h-lvh max-w-[400px]">
+      <div className="bg-gray-900 px-[20px] pt-[40px] overflow-y-auto w-full min-h-lvh max-w-[600px]">
         <div className="w-full h-full relative">
           <Title text="STATS MAKER" />
 
@@ -139,10 +139,12 @@ export default function Home() {
             maxStat={maxStatlabelList[maxStatIndex]}
             statDatas={statData}
             chartColor={rgb}
+            ref={graphRef}
           />
 
           <BlockButton
-            text="PNG로 저장"
+            onClick={() => onClickDownload(graphRef.current)}
+            text="투명하게 저장"
             icon={
               <RiDownloadFill className="transition-transform duration-300 group-hover:translate-y-1 group-active:translate-y-1" />
             }

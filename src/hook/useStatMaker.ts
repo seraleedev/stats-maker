@@ -1,32 +1,10 @@
-"use client";
-import { useState, useRef } from "react";
-import {
-  initialColor,
-  initialData,
-  IStatData,
-  maxStatlabelList,
-} from "@/configs/initial";
-import { colorToRgba } from "@/util/colorFn";
+import { useState } from "react";
+import { initialData, IStatData, maxStatlabelList } from "@/configs/initial";
 
 export const useStatMaker = () => {
-  const colorPickerRef = useRef<HTMLInputElement>(null);
-  const [name, setName] = useState<string>("");
-  const [rgb, setRgb] = useState<number[]>(initialColor);
   const [maxStatIndex, setMaxStatIndex] = useState<number>(0);
   const [statData, setStatData] = useState<IStatData[]>(initialData);
   const [showStatBox, setShowStatBox] = useState<boolean>(true);
-
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const onChangeColor = () => {
-    const color = colorPickerRef.current?.value;
-    if (color) {
-      const value = colorToRgba(color);
-      setRgb(value);
-    }
-  };
 
   const onChangeStat = (value: number, index: number) => {
     const newDataList = statData.map((item, i) => {
@@ -66,12 +44,6 @@ export const useStatMaker = () => {
   };
 
   return {
-    name,
-    setName,
-    onChangeName,
-    rgb,
-    setRgb,
-    onChangeColor,
     maxStatIndex,
     setMaxStatIndex,
     statData,
@@ -82,6 +54,5 @@ export const useStatMaker = () => {
     onChangeLabel,
     resetStats,
     randomStats,
-    colorPickerRef,
   };
 };
