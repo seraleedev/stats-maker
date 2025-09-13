@@ -8,6 +8,7 @@ const Footer = () => {
         href="https://github.com/seraleedev/stats-maker"
         target="_blank"
         rel="noreferrer"
+        title="source code repository"
       >
         <RiGithubFill
           size={40}

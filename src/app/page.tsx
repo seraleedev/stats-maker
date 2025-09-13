@@ -19,7 +19,13 @@ import {
 } from "@/configs/initial";
 import { colorToRgba } from "@/util/colorFn";
 import StatBox from "@/components/form/StatBox";
-import { RiArrowDownSFill, RiArrowUpSFill } from "@remixicon/react";
+import {
+  RiArrowDownSFill,
+  RiArrowUpSFill,
+  RiDiceLine,
+  RiDownloadFill,
+  RiResetLeftLine,
+} from "@remixicon/react";
 import IconButton from "@/components/button/iconButton";
 
 export default function Home() {
@@ -62,15 +68,28 @@ export default function Home() {
     setStatData(newDataList);
   };
 
+  const resetStats = () => {
+    const resetStatList = statData.map((item) => {
+      return { ...item, stat: 1 };
+    });
+    setStatData(resetStatList);
+  };
+
+  const randomStats = () => {
+    const randomStatList = statData.map((item) => {
+      return {
+        ...item,
+        stat: Math.floor(Math.random() * maxStatlabelList[maxStatIndex]) + 1,
+      };
+    });
+    setStatData(randomStatList);
+  };
+
   return (
     <FlexBox className="justify-center">
       <div className="bg-gray-900 px-[20px] pt-[40px] overflow-y-auto w-full min-h-lvh max-w-[400px]">
         <div className="w-full h-full relative">
           <Title text="STATS MAKER" />
-
-          {/* <FlexBox className="mt-8 gap-3 justify-end">
-            <Switch text="랜덤 수치" />
-          </FlexBox> */}
 
           <form className="grid grid-cols-1 gap-2 mt-10">
             <InputBox
@@ -98,7 +117,10 @@ export default function Home() {
                 />
               }
             />
-            <FlexBox className="justify-between w-full align-center mb-5 text-white">
+
+            <FlexBox
+              className={`justify-between w-full align-center text-white ${showStatBox ? "" : "mb-5"}`}
+            >
               <label className=" font-medium">수치 설정</label>
               <IconButton
                 icon={<RiArrowUpSFill />}
@@ -107,32 +129,43 @@ export default function Home() {
                 onClick={() => setShowStatBox(!showStatBox)}
               />
             </FlexBox>
-            {showStatBox &&
-              statData.map((data, index) => (
-                <StatBox
-                  className="mb-5"
-                  key={`stat-${index}`}
-                  components={
-                    <>
-                      <Input
-                        onChange={(e) => onChangeLabel(e.target.value, index)}
-                        value={data.label}
-                        placeholder={data.label}
-                      />
-                      <CounterInput
-                        index={index}
-                        className="max-w-32"
-                        id={`data-label-${index}`}
-                        value={data.stat}
-                        onChangeStat={onChangeStat}
-                        min={1}
-                        max={maxStatlabelList[maxStatIndex]}
-                      />
-                    </>
-                  }
-                />
-              ))}
 
+            {showStatBox && (
+              <div>
+                <BlockButton
+                  text="무작위 수치"
+                  icon={
+                    <RiDiceLine className="transition-transform duration-300 group-hover:rotate-45 group-active:rotate-45" />
+                  }
+                  className="mb-5"
+                  onClick={randomStats}
+                />
+                {statData.map((data, index) => (
+                  <StatBox
+                    className="mb-5"
+                    key={`stat-${index}`}
+                    components={
+                      <>
+                        <Input
+                          onChange={(e) => onChangeLabel(e.target.value, index)}
+                          value={data.label}
+                          placeholder={data.label}
+                        />
+                        <CounterInput
+                          index={index}
+                          className="max-w-32"
+                          id={`data-label-${index}`}
+                          value={data.stat}
+                          onChangeStat={onChangeStat}
+                          min={1}
+                          max={maxStatlabelList[maxStatIndex]}
+                        />
+                      </>
+                    }
+                  />
+                ))}
+              </div>
+            )}
             <InputBox
               labelName="그래프 색상"
               labelId="color"
@@ -152,8 +185,20 @@ export default function Home() {
             statDatas={statData}
             chartColor={rgb}
           />
-          <BlockButton text="PNG로 저장" />
-          <BlockButton text="초기화" design="cancel" />
+          <BlockButton
+            text="PNG 저장"
+            icon={
+              <RiDownloadFill className="transition-transform duration-300 group-hover:translate-y-1 group-active:translate-y-1" />
+            }
+          />
+          <BlockButton
+            text="수치값 초기화"
+            design="cancel"
+            onClick={resetStats}
+            icon={
+              <RiResetLeftLine className="transition-transform duration-800 group-hover:rotate-180 group-active:rotate-180" />
+            }
+          />
 
           <Footer />
         </div>
