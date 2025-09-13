@@ -6,18 +6,10 @@ import CounterInput from "@/components/form/CounterInput";
 import ColorInput from "@/components/form/ColorInput";
 import Input from "@/components/form/Input";
 import InputBox from "@/components/form/InputBox";
-import Switch from "@/components/Switch";
 import { Title } from "@/components/typhography";
 import Graph from "@/components/graph/Graph";
 import Footer from "@/components/Footer";
-import { useState, useRef } from "react";
-import {
-  initialColor,
-  initialData,
-  IStatData,
-  maxStatlabelList,
-} from "@/configs/initial";
-import { colorToRgba } from "@/util/colorFn";
+import { maxStatlabelList } from "@/configs/initial";
 import StatBox from "@/components/form/StatBox";
 import {
   RiArrowDownSFill,
@@ -27,63 +19,25 @@ import {
   RiResetLeftLine,
 } from "@remixicon/react";
 import IconButton from "@/components/button/iconButton";
+import { useStatMaker } from "../hook/useStatMaker";
 
 export default function Home() {
-  const colorPickerRef = useRef<HTMLInputElement>(null);
-  const [name, setName] = useState<string>("");
-  const [rgb, setRgb] = useState<number[]>(initialColor);
-  const [maxStatIndex, setMaxStatIndex] = useState<number>(0);
-  const [statData, setStatData] = useState<IStatData[]>(initialData);
-  const [showStatBox, setShowStatBox] = useState<boolean>(true);
-
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const onChangeColor = () => {
-    const color = colorPickerRef.current?.value;
-    if (color) {
-      const value = colorToRgba(color);
-      setRgb(value);
-    }
-  };
-
-  const onChangeStat = (value: number, index: number) => {
-    const newDataList = statData.map((item, i) => {
-      if (i === index) {
-        return { ...item, stat: value };
-      }
-      return item;
-    });
-    setStatData(newDataList);
-  };
-
-  const onChangeLabel = (value: string, index: number) => {
-    const newDataList = statData.map((item, i) => {
-      if (i === index) {
-        return { ...item, label: value };
-      }
-      return item;
-    });
-    setStatData(newDataList);
-  };
-
-  const resetStats = () => {
-    const resetStatList = statData.map((item) => {
-      return { ...item, stat: 1 };
-    });
-    setStatData(resetStatList);
-  };
-
-  const randomStats = () => {
-    const randomStatList = statData.map((item) => {
-      return {
-        ...item,
-        stat: Math.floor(Math.random() * maxStatlabelList[maxStatIndex]) + 1,
-      };
-    });
-    setStatData(randomStatList);
-  };
+  const {
+    name,
+    onChangeName,
+    rgb,
+    onChangeColor,
+    maxStatIndex,
+    setMaxStatIndex,
+    statData,
+    showStatBox,
+    setShowStatBox,
+    onChangeStat,
+    onChangeLabel,
+    resetStats,
+    randomStats,
+    colorPickerRef,
+  } = useStatMaker();
 
   return (
     <FlexBox className="justify-center">
@@ -131,7 +85,7 @@ export default function Home() {
             </FlexBox>
 
             {showStatBox && (
-              <div>
+              <>
                 <BlockButton
                   text="무작위 수치"
                   icon={
@@ -164,8 +118,9 @@ export default function Home() {
                     }
                   />
                 ))}
-              </div>
+              </>
             )}
+
             <InputBox
               labelName="그래프 색상"
               labelId="color"
@@ -185,14 +140,15 @@ export default function Home() {
             statDatas={statData}
             chartColor={rgb}
           />
+
           <BlockButton
-            text="PNG 저장"
+            text="PNG로 저장"
             icon={
               <RiDownloadFill className="transition-transform duration-300 group-hover:translate-y-1 group-active:translate-y-1" />
             }
           />
           <BlockButton
-            text="수치값 초기화"
+            text="수치 초기화"
             design="cancel"
             onClick={resetStats}
             icon={
