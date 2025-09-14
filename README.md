@@ -6,7 +6,8 @@
 
 [사이트 바로가기](https://stats-maker.surge.sh/)
 >제작기간: 1주
-> tailwind와 chart.js를 연습하기 위한 개인 프로젝트입니다.
+
+tailwind와 chart.js를 연습하기 위한 개인 프로젝트입니다.
 
 ## 주요 기능
 
