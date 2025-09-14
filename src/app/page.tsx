@@ -102,7 +102,7 @@ export default function Home() {
                       <>
                         <Input
                           onChange={(e) => onChangeLabel(e.target.value, index)}
-                          value={data.label}
+                          value={""}
                           placeholder={data.label}
                         />
                         <CounterInput

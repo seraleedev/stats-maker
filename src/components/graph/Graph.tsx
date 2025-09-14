@@ -74,11 +74,11 @@ const Graph = ({ name, maxStat, statDatas, chartColor, ref }: GraphProps) => {
           color: "#e5e7eb", // 각도 라인 색, gray-300
         },
         grid: {
-          color: maxStat < 100 ? "#e5e7eb" : "transparent", // 그리드 색, gray-300
+          color: "#e5e7eb", // 그리드 색, gray-300
         },
         ticks: {
           display: false,
-          stepSize: 1,
+          stepSize: Math.floor(maxStat / 2),
         },
         pointLabels: {
           color: theme.colors.black, // 레이블 색상

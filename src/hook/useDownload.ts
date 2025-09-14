@@ -11,7 +11,7 @@ export const useDownload = () => {
     try {
       if (typeof target.toBase64Image !== "function") {
         console.error("유효한 Chart.js 인스턴스가 아닙니다.");
-        alert("차트를 저장할 수 없습니다.");
+        alert("이미지를 저장할 수 없습니다.");
         return;
       }
 
@@ -22,7 +22,7 @@ export const useDownload = () => {
       saveAs(blob, "stats.png");
     } catch (error) {
       console.log(error);
-      alert("Image saving is fail.");
+      alert("이미지를 저장에 실패했습니다.");
     }
   };
 
