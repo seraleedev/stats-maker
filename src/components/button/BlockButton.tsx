@@ -17,9 +17,9 @@ const BlockButton = ({
       type="button"
       className={`group
          block w-full cursor-pointer rounded-sm
-         px-5 py-2
+         px-8 py-2
          font-medium text-md text-center
-         me-2 mb-2
+         mt-3 mb-3
          focus:outline-none active:ring-2
          ${design == "cancel" ? cancelStyle : primaryStyle}
          ${className}
