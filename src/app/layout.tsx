@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     description: "나의 스탯을 자유롭게 만들어 보세요!",
     url: "https://stats-maker.surge.sh/",
-    siteName: "ooetype",
+    siteName: "stat-maker",
     images: [
       {
         url: "https://stats-maker.surge.sh/img/meta-img.jpg",
